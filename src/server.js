@@ -11,18 +11,18 @@ const PORT = Number(getEnvVar('PORT', 3000));
 export const setupServer = () => {
   const app = express();
 
+  const corsMiddleware = cors();
   app.use(express.json());
-  app.use(cors());
+  const logger = pino({
+    transport: {
+      target: 'pino-pretty',
+    },
+  });
 
-  app.use(
-    pino({
-      transport: {
-        target: 'pino-pretty',
-      },
-    }),
-  );
+  app.use(corsMiddleware);
+  app.use(logger);
 
-  app.use(contactsRouts);
+  app.use('/contacts', contactsRouts);
 
   app.use('*', notFoundHandler);
   

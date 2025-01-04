@@ -7,12 +7,15 @@ export const getContactById = contactId => ContactsCollection.findById(contactId
 
 export const addContact = payload => ContactsCollection.create(payload);
 
-export const updateContact = async (_contactId, payload) => {
-  const result = await ContactsCollection.findOneAndUpdate({_contactId}, payload, {
+export const updateContact = async (_id, payload) => {
+  const result = await ContactsCollection.findOneAndUpdate({_id}, payload, {
     new: true,
 });
 
   return result;
 };
 
-export const deleteContact = filter => ContactsCollection.findOneAndDelete(filter);
+export const deleteContact = async (_id) => {
+  const result = await ContactsCollection.findOneAndDelete({ _id });
+  return result;
+};
