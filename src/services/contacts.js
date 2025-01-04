@@ -7,8 +7,8 @@ export const getContactById = contactId => ContactsCollection.findById(contactId
 
 export const addContact = payload => ContactsCollection.create(payload);
 
-export const updateContact = async (contactId, payload) => {
-  const result = await ContactsCollection.findOneAndUpdate(contactId, payload, {
+export const updateContact = async (_contactId, payload) => {
+  const result = await ContactsCollection.findOneAndUpdate({_contactId}, payload, {
     new: true,
 });
 
