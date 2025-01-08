@@ -18,7 +18,7 @@ export const getAllContacts = async ({
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
   const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
-  const total = ContactsCollection.countDocuments();
+  const total = await ContactsCollection.countDocuments();
   const paginationData = calculatePaginationData({total, page, perPage});
 
   return {
@@ -29,7 +29,7 @@ export const getAllContacts = async ({
     ...paginationData, 
   };
   } catch (error) {
-    throw new Error('Error:', error.message);
+    throw new Error(`Error: ${error.message}`);
   }
 };
 
