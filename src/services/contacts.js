@@ -5,11 +5,12 @@ import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 export const getAllContacts = async ({
     page = 1, 
     perPage = 10, 
-    sortBy = "name", 
-    sortOrder = "asc",
+    sortBy = 'name', 
+    sortOrder = 'asc',
     filter = {},
 }) => {
-  const limit = perPage;
+  try {
+    const limit = perPage;
   const skip = (page - 1) * limit;
   const contactsQuery = ContactsCollection.find();
 
@@ -27,6 +28,9 @@ export const getAllContacts = async ({
     totalItems: total,
     ...paginationData, 
   };
+  } catch (error) {
+    throw new Error('Error:', error.message);
+  }
 };
 
 export const getContactById = contactId => ContactsCollection.findById(contactId);

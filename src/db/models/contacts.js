@@ -47,13 +47,6 @@ contactsSchema.post("findOneAndUpdate", (error, doc, next)=> {
   next();
   });
 
-  export const sortByList = [
-      '_id',
-      'name',
-      'phoneNumber',
-      'email',
-      'isFavourite',
-      'contactType',
-  ];
+  export const sortByList = ['name'];
 
 export const ContactsCollection = model('contacts', contactsSchema);
