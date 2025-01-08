@@ -3,7 +3,7 @@ import { sortByList } from "../db/models/contacts.js";
 
 export const parseSortParams = ({sortBy, sortOrder}) => {
 const parsedSortOrder = sortOrderList.includes(sortOrder) ? sortOrder : sortOrderList[0];
-const parsedSortBy = sortByList.includes(sortBy) ? sortBy : '_id';
+const parsedSortBy = sortByList.includes(sortBy) ? sortBy : 'name';
 return {
     sortOrder: parsedSortOrder,
     sortBy: parsedSortBy,

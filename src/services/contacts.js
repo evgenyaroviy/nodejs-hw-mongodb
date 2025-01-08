@@ -18,14 +18,19 @@ export const getAllContacts = async ({
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
   const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
-  const total = await ContactsCollection.find().merge(contactsQuery).countDocuments();
-  const paginationData = calculatePaginationData({total, page, perPage});
+  const totalItems = await contactsQuery.countDocuments();
+
+  if (totalItems == null) {
+    throw new Error('Failed to calculate total items');
+  }
+
+  const paginationData = calculatePaginationData(totalItems, page, perPage);
 
   return {
     data,
     page, 
     perPage, 
-    totalItems: total,
+    totalItems,
     ...paginationData, 
   };
   } catch (error) {
