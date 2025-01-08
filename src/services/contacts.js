@@ -17,13 +17,13 @@ export const getAllContacts = async ({
   if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
-  const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
-  const totalItems = await contactsQuery.countDocuments();
+  const data = await ContactsCollection.find().merge(contactsQuery).skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
+  const totalItems = await ContactsCollection.find().merge(contactsQuery).countDocuments();
 
   if (totalItems == null) {
-    throw new Error('Failed to calculate total items');
+    throw new Error('Total items not calculated correctly');
   }
-
+  
   const paginationData = calculatePaginationData(totalItems, page, perPage);
 
   return {
