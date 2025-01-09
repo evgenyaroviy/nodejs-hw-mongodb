@@ -4,12 +4,8 @@ const parseBoolean = (bool) => {
     return undefined;
   };
   
-  
   export const parseContactsFilterParams = ({isFavourite}) => {
-   
     const parsedIsFavourite = parseBoolean(isFavourite);
-console.log(parsedIsFavourite);
-
 
     return {isFavourite: parsedIsFavourite};
 };
