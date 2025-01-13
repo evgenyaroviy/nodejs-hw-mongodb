@@ -17,8 +17,8 @@ export const getAllContacts = async ({
   if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
-  const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
   const totalItems = await ContactsCollection.find().merge(contactsQuery).countDocuments();
+  const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
 
   // if (totalItems == null) {
   //   throw new Error('Total items not calculated correctly');
