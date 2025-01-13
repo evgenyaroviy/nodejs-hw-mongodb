@@ -1,5 +1,5 @@
 import express from 'express';
-import pino from 'pino-http';
+// import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
 import contactsRouts from './routers/contacts.js';
@@ -13,14 +13,14 @@ export const setupServer = () => {
 
   const corsMiddleware = cors();
   app.use(express.json());
-  const logger = pino({
-    transport: {
-      target: 'pino-pretty',
-    },
-  });
+  // const logger = pino({
+  //   transport: {
+  //     target: 'pino-pretty',
+  //   },
+  // });
 
   app.use(corsMiddleware);
-  app.use(logger);
+  // app.use(logger);
 
   app.use('/contacts', contactsRouts);
 
