@@ -1,6 +1,7 @@
 import express from 'express';
 // import pino from 'pino-http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { getEnvVar } from './utils/getEnvVar.js';
 import authRouter from './routers/auth.js';
 import contactsRouts from './routers/contacts.js';
@@ -21,6 +22,7 @@ export const setupServer = () => {
   // });
 
   app.use(corsMiddleware);
+  app.use(cookieParser());
   // app.use(logger);
 
   app.use('/auth', authRouter);

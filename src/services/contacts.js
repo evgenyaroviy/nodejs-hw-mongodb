@@ -17,6 +17,11 @@ export const getAllContacts = async ({
   if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
+  if(filter.userId) {
+    contactsQuery.where('userId').equals(filter.userId);
+  }
+
+
   const totalItems = await ContactsCollection.find().merge(contactsQuery).countDocuments();
   const data = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder });
 
@@ -39,10 +44,12 @@ export const getAllContacts = async ({
 
 export const getContactById = contactId => ContactsCollection.findById(contactId);
 
+export const getContact = filter => ContactsCollection.findOne(filter);
+
 export const addContact = payload => ContactsCollection.create(payload);
 
-export const updateContact = async (_id, payload) => {
-  const result = await ContactsCollection.findOneAndUpdate({_id}, payload);
+export const updateContact = async (filter, payload) => {
+  const result = await ContactsCollection.findOneAndUpdate(filter, payload);
 
   return result;
 };
