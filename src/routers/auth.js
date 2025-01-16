@@ -10,12 +10,12 @@ import { authRegisterSchema, authLoginSchema } from "../validation/auth.js";
 
 const authRouter = Router();
 
-authRouter.post('/auth/register', validateBody(authRegisterSchema),ctrlWrapper(authController.registerController));
+authRouter.post('/register', validateBody(authRegisterSchema),ctrlWrapper(authController.registerController));
 
-authRouter.post('/auth/login', validateBody(authLoginSchema), ctrlWrapper(authController.loginController));
+authRouter.post('/login', validateBody(authLoginSchema), ctrlWrapper(authController.loginController));
 
-authRouter.post('/auth/refresh', ctrlWrapper(authController.refreshTokenController));
+authRouter.post('/refresh', ctrlWrapper(authController.refreshTokenController));
 
-authRouter.post('/auth/logout', ctrlWrapper(authController.logoutController));
+authRouter.post('/logout', ctrlWrapper(authController.logoutController));
 
 export default authRouter;
