@@ -12,6 +12,11 @@ export const authenticate = async (req, res, next) => {
     if (bearer !== "Bearer") {
         return next(createHttpError(401, "Authorization header is not Bearer"));
     }
+    const { sessionId } = req.cookies;
+
+    if (!sessionId) {
+        return next(createHttpError(401, 'Unauthorized'));
+    }
 
     const session = await getSession({accessToken});
     if (!session) {

@@ -42,8 +42,8 @@ next();
 });
 
 contactsSchema.pre("findOneAndUpdate", function(next) {
-    this.option.new = true,
-    this.option.runValidators = true,
+    this.options.new = true,
+    this.options.runValidators = true,
 next();
 });
 

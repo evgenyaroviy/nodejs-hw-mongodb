@@ -32,7 +32,7 @@ export const getContactByIdController = async (req, res, next) => {
     // Відповідь, якщо контакт знайдено
     res.status(200).json({
         status: 200,
-        message: `Successfully found contact with id ${contactId}!`,
+        message: `Successfully found contact with id ${_id}!`,
         data: contact,
     });
 };
@@ -52,18 +52,16 @@ export const addContactController = async (req, res) => {
 export const patchContactController = async (req, res, next) => {
     const { _id: userId } = req.user;
     const { contactId: _id } = req.params;
-    const resalt  = await contactService.updateContact({_id, userId}, req.body);
+    const result = await contactService.updateContact({ _id, userId }, req.body);
 
-    if(!resalt) {
-        throw createHttpError(404, 'Contact not found');
+    if (!result) {
+        return next(createHttpError(404, 'Contact not found'));
     }
 
-    const contact = await contactService.getContactById(contactId);
-    
     res.status(200).json({
         status: 200,
-	message: "Successfully patched a contact!",
-    data: contact,
+        message: "Successfully patched a contact!",
+        data: result,
     });
 };
 
