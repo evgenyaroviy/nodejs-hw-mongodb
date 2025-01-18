@@ -13,7 +13,7 @@ import { accessTokenLifetime, refreshTokenLifetime } from '../constants/users.js
 
 import { SMTP } from '../constants/index.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
-import { sendEmail } from '../utils/sendMail.js';
+import { sendEmail } from '../utils/sendEmail.js';
 
 import { TEMPLATE_DIR } from '../constants/index.js';
 
