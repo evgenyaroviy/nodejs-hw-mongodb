@@ -14,8 +14,9 @@ export const setupServer = () => {
   const app = express();
 
   const corsMiddleware = cors();
-  app.use(cookieParser());
   app.use(express.json());
+  app.use(express.static('uploads'));
+  app.use(cookieParser());
   // const logger = pino({
   //   transport: {
   //     target: 'pino-pretty',
