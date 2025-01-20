@@ -133,6 +133,7 @@ export const resetPassword = async (payload) => {
   });
 
   if (!user) {
+    console.log('User not found:', entries.email, entries.sub);
     throw createHttpError(404, 'User not found');
   }
 
