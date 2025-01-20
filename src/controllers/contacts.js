@@ -45,27 +45,28 @@ export const getContactByIdController = async (req, res, next) => {
     });
 };
 
-export const addContactController = async (req, res) => {
+export const addContactController = async (req, res, next) => {
+    try {
+        let photo;
+        if (req.file) {
+            if (cloudenaryEnable) {
+                photo = await saveFileToCloud(req.file);
+            } else {
+                photo = await saveFileToUploadsDir(req.file);
+            }
+        }
 
-    let photo;
-    if (req.file) {
-        if (cloudenaryEnable) {
-            photo = await saveFileToCloud(req.file);
-        }
-        else {
-            photo = await saveFileToUploadsDir(req.file);
-        }
+        const { _id: userId } = req.user;
+        const data = await contactService.addContact({ ...req.body, photo, userId });
+
+        res.status(201).json({
+            status: 201,
+            message: "Successfully created a contact!",
+            data,
+        });
+    } catch (error) {
+        next(error); // Передача помилки в middleware для обробки помилок
     }
-
-    const {_id: userId} = req.user;
-    
-    const data  = await contactService.addContact({...req.body, photo, userId});
-
-    res.status(201).json({
-        status: 201,
-		message: "Successfully created a contact!",
-		data,
-    });
 };
 
 export const patchContactController = async (req, res, next) => {
