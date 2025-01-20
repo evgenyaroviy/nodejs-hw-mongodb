@@ -4,8 +4,8 @@ import { unlink } from 'node:fs/promises';
 import { getEnvVar } from '../utils/getEnvVar.js';
 
 const cloud_name = getEnvVar('CLOUDINARY_NAME');
-const api_key = getEnvVar('CLOUDINARY_API_KEY');
-const api_secret = getEnvVar('CLOUDINARY_API_SECRET');
+const api_key = getEnvVar('CLOUDINARY_KEY');
+const api_secret = getEnvVar('CLOUDINARY_SECRET');
 
 cloudinary.config({
     cloud_name,
