@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import swaggerUiExpress from 'swagger-ui-express';
 import createHttpError from 'http-errors';
 
