@@ -2,19 +2,19 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "<Contact App>",
+    "title": "Contact App",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "<опис вашого додатку>"
+    "description": "Contact book"
   },
   "servers": [
     {
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://contacts.com/api/v1"
+      "url": "https://nodejs-hw-mongodb-p70k.onrender.com"
     }
   ],
   "tags": [
@@ -33,7 +33,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Get list of contacts",
+        "summary": "Retrieve a list of contacts",
         "operationId": "getAllContacts",
         "description": "Get list of contacts with this endpoint",
         "security": [
@@ -167,7 +167,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Create contact",
+        "summary": "Create a new contact",
         "operationId": "addContact",
         "description": "Create a contact with payload",
         "security": [
@@ -267,7 +267,7 @@
               }
             }
           },
-          "401": {
+          "404": {
             "$ref": "#/components/responses/404"
           }
         }
@@ -278,7 +278,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Get contact by id",
+        "summary": "Retrieve a contact by ID",
         "operationId": "getContactById",
         "description": "Get contact by id",
         "security": [
@@ -327,7 +327,7 @@
               }
             }
           },
-          "401": {
+          "404": {
             "$ref": "#/components/responses/404"
           }
         }
@@ -336,7 +336,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Patch contact by id",
+        "summary": "Update a contact by ID",
         "operationId": "updateContact",
         "description": "Update contact by id",
         "security": [
@@ -385,7 +385,39 @@
               }
             }
           },
-          "401": {
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete a contact by ID",
+        "operationId": "deleteContact",
+        "description": "Delete contact by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
             "$ref": "#/components/responses/404"
           }
         }
