@@ -12,8 +12,8 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
+  - url: https://nodejs-hw-mongodb-q121.onrender.com/api-docs
   - url: http://localhost:3000
-  - url: https://nodejs-hw-mongodb-p70k.onrender.com
 paths:
   /contacts:
     get:
